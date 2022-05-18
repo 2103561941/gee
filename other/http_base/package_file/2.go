@@ -1,0 +1,5 @@
+package hh
+
+func test() {
+	
+}

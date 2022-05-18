@@ -1,0 +1,21 @@
+gee.go
+主要框架代码在gee，对外开放的接口，用户通过使用Engine对象中的方法设计一个web服务器
+
+router.go
+主要创建的方法是设置路由(Router)。
+
+tree.go
+动态路由：使用前缀树模型，如果part字段里包含":" 或者 "*",代表是动态路由，可以直接匹配
+
+group.go
+路由分组控制：分组主要是对不同路由实现不同的中间件插入的需求。
+设置了group类来作为addRouter等接口的操作类，通过查询前缀(prefix)来判断是否处于同一个组里面，并将共同的中间件加入到待执行的列表里
+
+context.go
+封装了http中的Writer和Request，分离了部分常用的req的属性，如path，作为http传输的媒介。
+在用户设置GET、POST等路由时可以作为接收对象，获得客户端发送过来的http head 和 body数据。
+也支持了JSON、HTML、String等封装好的向客户端的传输方式，开箱即用
+
+ 
+logger
+Default 默认支持的中间件用于打印日志
