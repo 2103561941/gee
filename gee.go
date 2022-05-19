@@ -30,7 +30,7 @@ func New() *Engine {
 func Defalut() *Engine {
 	engine := New()
 	g := engine.Group("/")
-	g.Use(Logger())
+	g.Use(Logger(), Recovery())
 	return engine
 }
 

@@ -77,7 +77,6 @@ func (c *Context) HTML(code int , name string, data interface{}) {
 	if err := c.engine.htmlTemplate.ExecuteTemplate(c.Writer, name, data); err != nil {
 		c.Fail(500, err.Error())
 	}
-	// c.Writer.Write([]byte(html))
 }
 
 func (c *Context) Param(key string) string {

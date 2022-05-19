@@ -7,8 +7,8 @@ import (
 )
 
 type router struct {
-	roots    map[string]*node      
-	handlers map[string]HandlerFunc 
+	roots    map[string]*node
+	handlers map[string]HandlerFunc
 }
 
 func newRouter() *router {
@@ -36,12 +36,12 @@ func (r *router) addRoute(method string, Pattern string, handler HandlerFunc) {
 	key := method + "-" + Pattern
 
 	_, ok := r.roots[method]
-	if !ok { 
+	if !ok {
 		r.roots[method] = &node{}
 	}
 	r.roots[method].insert(Pattern, parts, 0)
 	r.handlers[key] = handler
-	log.Printf("Route %4s - %s", method, Pattern) 
+	log.Printf("Route %4s - %s", method, Pattern)
 }
 
 func (r *router) getRouter(method string, path string) (*node, map[string]string) {
@@ -58,12 +58,12 @@ func (r *router) getRouter(method string, path string) (*node, map[string]string
 
 		log.Println(75, parts)
 
-		params := make(map[string]string) 
+		params := make(map[string]string)
 		for index, part := range parts {
 			if part[0] == ':' {
 				params[part[1:]] = searchPattern[index]
 			}
-			if (part[0] == '*') && (len(part) > 1) { 
+			if (part[0] == '*') && (len(part) > 1) {
 				log.Println(83, part)
 				params[part[1:]] = strings.Join(searchPattern[index:], "/")
 				break
@@ -73,7 +73,6 @@ func (r *router) getRouter(method string, path string) (*node, map[string]string
 	}
 	return nil, nil
 }
-
 
 func (r *router) handle(c *Context) {
 	n, params := r.getRouter(c.Method, c.Path)
@@ -89,5 +88,6 @@ func (r *router) handle(c *Context) {
 		})
 
 	}
-	c.Next() 
+
+	c.Next()
 }
