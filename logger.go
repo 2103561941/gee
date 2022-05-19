@@ -9,6 +9,6 @@ import (
 
 func Logger() HandlerFunc {
 	return func(c *Context) {
-		log.Printf("%q, URL.Path = %s\n", time.Now(), c.Path)
+		log.Printf("%q, URI = %s, StatusCode = %d\n", time.Now(), c.Req.RequestURI, c.StatusCode)
 	}
 }

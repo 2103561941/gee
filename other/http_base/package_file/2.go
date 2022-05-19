@@ -1,5 +1,0 @@
-package hh
-
-func test() {
-	
-}
